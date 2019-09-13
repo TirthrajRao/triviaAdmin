@@ -1,0 +1,22 @@
+<form [formGroup]="loginForm">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label class="bmd-label-floating"><i class="fas fa-user fa-fw "> </i> Email</label>
+
+				<input type="text" class="form-control" formControlName="email" name="email" [(ngModel)]="admin.email" id="email" required="required">
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label class="bmd-label-floating"><i class="fas fa-key fa-fw"> </i> Password</label>
+				<input type="password" class="form-control" formControlName="password" name="password" [(ngModel)]="admin.password" id="password" required="required">
+			</div>
+		</div>
+		<button type="submit"  class="btn btn-primary" (click)="login(admin)" [disabled]="!loginForm.valid">Log In</button>
+		<div class="col-md-6">
+			<p class="msg_error" style="text-align: center;">{{ errmsg }}</p>
+			<p class="msg_success" style="text-align: center;">{{ msg }}</p>
+		</div>
+	</div>
+</form>

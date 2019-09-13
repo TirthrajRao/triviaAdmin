@@ -1,0 +1,90 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+
+			<h3 align="center">Add News</h3><br>
+			<!-- add category form-->
+			<form [formGroup]="news_form" (ngSubmit) = "addNews()">
+				<div class="row">
+					<div class="col-md-6">
+						<input type="text" formControlName="newsTitleEnglish" name="categoryTitle" required="required" placeholder="News Title (English)"><br><br>
+					</div>
+					<div class="col-md-6">
+						<input type="text" formControlName="newsTitleHindi" name="categoryTitle" required="required" placeholder="News Title (Hindi)"><br><br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<textarea formControlName="newsEnglish" placeholder="News (English)"></textarea><br><br>
+					</div>
+					<div class="col-md-6">
+						<textarea formControlName="newsHindi" placeholder="News (Hindi)"></textarea><br><br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<select formControlName="categoryId">
+							<option selected="selected" disabled="disabled" value="">Choose category</option>
+							<option *ngFor="let category of category_array" value="{{category.categoryId}}">
+								{{category.categoryTitle}}
+							</option>
+						</select><br><br>
+					</div>
+				</div>
+				<input type="file" formControlName="newsImage" name="categoryImage"required="required" (change)="news_image($event)"><br><br>
+				<input type="submit" name="categories_submit" [disabled]="!news_form.valid" class="btn btn-primary">
+			</form>
+		</div>
+		<div class="col-md-6">
+			<h3 align="center">All News</h3><br>
+			<table border="1" class="table">
+				<thead>
+					<th>Title (EN)</th>
+					<th>News (EN)</th>
+					<th colspan="2">Action</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let news of news_array">
+						<td>{{news.newsTitleEnglish}}</td>
+						<td>{{news.newsEnglish}}</td>
+						<td><a style="color: blue" data-toggle="modal" data-target="#myModal" (click)="editNews(news)">View or Edit</a></td>
+						<td><a style="color: red" (click)="deleteNews(news.newsId)">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-body">
+				<h5>Update:</h5>
+				<form [formGroup]="editnews_form" *ngIf="singleNews">
+					Title (En): <input type="text"  formControlName="newsTitleEnglish"  [(ngModel)]="singleNews.newsTitleEnglish"><br><br>
+
+					Title (Hindi): <input type="text"  formControlName="newsTitleHindi"  [(ngModel)]="singleNews.newsTitleHindi"><br><br>
+
+					News (En): <textarea formControlName="newsEnglish"  [(ngModel)]="singleNews.newsEnglish"></textarea><br><br>
+
+					News (Hindi): <textarea formControlName="newsHindi"  [(ngModel)]="singleNews.newsHindi"></textarea><br><br>
+					<div class="col-md-6">
+						<input type="file" formControlName="newsImage" (change)="addFile($event)"><br><br>
+					</div>
+					<div class="col-md-6" *ngIf="url">
+						<img [src]="url" height="50px" width="50px">
+					</div>
+					<div class="col-md-6" *ngIf="!url">
+						<img src="{{mediaPath}}{{singleNews.newsImage}}" height="50px" width="50px">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateCat(singleCat)">Update</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" (click)="resetUpdateForm()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
