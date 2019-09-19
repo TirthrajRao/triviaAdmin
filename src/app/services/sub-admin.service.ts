@@ -40,4 +40,8 @@ export class SubAdminService {
 	updateSubAdmin(subAdmin){
 		return this.http.put(config.baseApiUrl + "subadmin", subAdmin);
 	}
+
+	addOtherDetails(data){
+		return this.http.post(config.baseApiUrl + "terms", data);
+	}
 }	

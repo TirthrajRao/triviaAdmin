@@ -65,9 +65,7 @@ export class SubAdminComponent implements OnInit {
 
   //delete subAdmin
   deleteSubAdmin(userId){
-    this._subAdminService
-    .deleteSubAdmin(userId)
-    .subscribe(() => {
+    this._subAdminService.deleteSubAdmin(userId).subscribe(() => {
       this.getSubAdmin();
     })
   }
@@ -75,7 +73,7 @@ export class SubAdminComponent implements OnInit {
   editSubAdmin(subadmin){
     this.singleSubAdmin = subadmin;
   }
-
+  
   resetUpdateForm(){
     this.editsubadminForm.reset();
     this.getSubAdmin();

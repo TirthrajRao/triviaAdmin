@@ -1,0 +1,19 @@
+<div class="container"><br>
+	<form [formGroup]="details">
+		<div class="row">
+			<div class="col-md-6">
+
+				App logo:
+				<input type="file" formControlName="logo" [(ngModel)]="otherDetails.logo" (change)="logoImage($event)"><br><br>
+
+				Privacy Policy:
+				<ckeditor  [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy"></ckeditor><br><br>
+
+				Terms and Condition:
+				<ckeditor  [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"></ckeditor><br><br>
+
+				<input type="submit" name="" (click)="extraDetails(otherDetails)" [disabled]="!details.valid">
+			</div>
+		</div>
+	</form>
+</div>

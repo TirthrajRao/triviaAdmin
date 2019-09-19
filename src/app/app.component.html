@@ -12,6 +12,9 @@
 		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
 			<a class="nav-link" routerLink="/sub-admin">Sub Admin</a>
 		</li>
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
+			<a class="nav-link" routerLink="/other-details">Other Details</a>
+		</li>
 		<li class="nav-item" *ngIf="auth.isLoggednIn()">
 			<a class="nav-link" outerLink="/login" (click)="Logout()">Logout</a>
 		</li>

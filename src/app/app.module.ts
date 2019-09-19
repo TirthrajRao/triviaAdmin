@@ -13,6 +13,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { NewsComponent } from './news/news.component';
 import { SubAdminComponent } from './sub-admin/sub-admin.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { OtherDetailsComponent } from './other-details/other-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
   DashboardComponent,
   CategoriesComponent,
   NewsComponent,
-  SubAdminComponent
+  SubAdminComponent,
+  OtherDetailsComponent
   ],
   imports: [
   HttpClientModule,
