@@ -27,7 +27,7 @@ const routes: Routes = [
 	canActivate: [AuthGuard]
 },
 {
-	path: 'news',
+	path: 'trivia-posts',
 	component: NewsComponent,
 	canActivate: [AuthGuard]
 },

@@ -49,6 +49,7 @@ export class CategoriesComponent implements OnInit {
 		this._categoryService.getAll().subscribe(
 			(res: Categories[]) => {
 				this.category_array = res;
+				console.log(this.category_array);
 			},
 			(err) => {
 				this.error = err;
@@ -126,6 +127,7 @@ export class CategoriesComponent implements OnInit {
 
 	// for image preview on edit click
 	public addFile(event: any) {
+		this.file = event.target.files;
 		if (event.target.files && event.target.files[0]) {
 			var reader = new FileReader();
 			reader.onload = (event: any) => {

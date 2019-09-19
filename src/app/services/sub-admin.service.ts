@@ -4,14 +4,14 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { from as observableFrom } from 'rxjs';
 import {config} from '../config';
-import {News} from '../news/news';
+import {SubAdmin} from '../sub-admin/sub-admin';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class NewsService {
+export class SubAdminService {
 
-	newsArray: News[];
+	subAdminArray: SubAdmin[];
 
 	private handleError(error: HttpErrorResponse) {
 		return throwError('Error! something went wrong.');
@@ -20,25 +20,24 @@ export class NewsService {
 	constructor(private http: HttpClient) { }
 
 	//add news
-	addNews(data){
-		return this.http.post(config.baseApiUrl + "news", data);
+	addSubAdmin(data){
+		return this.http.post(config.baseApiUrl + "subadmin", data);
 	}
 
-	//fetch all news
-	getAllNews(): Observable<News[]> {
-		return this.http.get(config.baseApiUrl + `news`).pipe(
+	getAll() :Observable<SubAdmin[]> {
+		return this.http.get(config.baseApiUrl + `subadmin`).pipe(
 			map((res) => {
-				this.newsArray = res['data'];
-				return this.newsArray;
+				this.subAdminArray = res['data'];
+				return this.subAdminArray;
 			}),
 			catchError(this.handleError));
 	}
 
-	//delete news
-	deleteNews(newsId){
-		return this.http.put(config.baseApiUrl + "remove-news/" + newsId, {});
+	deleteSubAdmin(userId){
+		return this.http.delete(config.baseApiUrl + "subadmin?userId=" + userId);
 	}
-	updateNews(data, id){
-		return this.http.put(config.baseApiUrl + "update-news/" + id, data);
+
+	updateSubAdmin(subAdmin){
+		return this.http.put(config.baseApiUrl + "subadmin", subAdmin);
 	}
-}
+}	

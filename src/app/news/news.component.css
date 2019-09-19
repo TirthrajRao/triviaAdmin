@@ -1,0 +1,9 @@
+.ck-blurred .ck .ck-content .ck-editor__editable .ck-rounded-corners .ck-editor__editable_inline{
+	border: 5px solid black!important;
+}
+
+td{
+  height: 100px;
+  overflow: auto;
+
+}

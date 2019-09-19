@@ -12,6 +12,7 @@ import { AuthGuard } from './auth.guard';
 import { CategoriesComponent } from './categories/categories.component';
 import { NewsComponent } from './news/news.component';
 import { SubAdminComponent } from './sub-admin/sub-admin.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SubAdminComponent } from './sub-admin/sub-admin.component';
   AppRoutingModule,
   BrowserModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  CKEditorModule
   ],
   providers: [LoginService,AuthGuard],
   bootstrap: [AppComponent]

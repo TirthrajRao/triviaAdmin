@@ -7,6 +7,8 @@ import {NewsService} from '../services/news.service';
 import {CategoryService} from '../services/category.service';
 import {Categories} from '../categories/categories';
 import {News} from './news';
+import {CKEditor4} from  'ckeditor4-angular';
+
 @Component({
 	selector: 'app-news',
 	templateUrl: './news.component.html',
@@ -19,10 +21,23 @@ export class NewsComponent implements OnInit {
 	mediaPath = config.mediaApiUrl;
 	news_array: News[];
 	singleNews: [];
+	url: any;
+	config: any;
 
-	constructor(public _newsService: NewsService, public _categoryService:CategoryService) { }
+	
+
+	constructor(public _newsService: NewsService, public _categoryService:CategoryService) {
+	}
 
 	ngOnInit() {
+		this.config = {
+			toolbar: [
+			['Maximize'],
+			['NumberedList', 'BulletedList'],
+			['Cut', 'Copy'],
+			['Undo', 'Redo']
+			]
+		};
 		this.getCategories();
 		this.getNews();
 	}
@@ -100,7 +115,6 @@ export class NewsComponent implements OnInit {
 	}
 
 	editNews(news){
-		
 		this.singleNews = news;
 	}
 
@@ -110,6 +124,39 @@ export class NewsComponent implements OnInit {
 		.deleteNews(newsId)
 		.subscribe(() => {
 			this.getNews();
+		})
+	}
+
+	// for image preview on edit click
+	public addFile(event: any) {
+		this.fileNews = event.target.files;
+		if (event.target.files && event.target.files[0]) {
+			var reader = new FileReader();
+			reader.onload = (event: any) => {
+				this.url = event.target.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	}
+
+	updateCat(news){
+		const data = new FormData();
+		_.forOwn(this.editnews_form.value, (value, key) => {
+			data.append(key, value);
+		});
+
+		if (this.fileNews.length > 0) {
+			for (let i = 0; i <= this.fileNews.length; i++) {
+				data.append('newsImage', this.fileNews[i]);
+			}
+		}
+		this._newsService.updateNews(data, news.newsId).subscribe((res:any)=>{
+			console.log("res=========>",res);
+			this.editnews_form.reset();
+			this.getCategories();
+		},
+		err=>{
+			console.log(err);
 		})
 	}
 }
