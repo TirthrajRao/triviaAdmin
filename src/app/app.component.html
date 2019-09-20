@@ -3,16 +3,22 @@
 		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
 			<a class="nav-link" routerLink="/dashboard">Dashboard</a>
 		</li>
-		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
 			<a class="nav-link" routerLink="/categories">Categories</a>
 		</li>
 		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
 			<a class="nav-link" routerLink="/trivia-posts">Trivia Posts</a>
 		</li>
-		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
 			<a class="nav-link" routerLink="/sub-admin">Sub Admin</a>
 		</li>
-		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn()">
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
+			<a class="nav-link" routerLink="/pending-posts">Pending Posts</a>
+		</li>
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
+			<a class="nav-link" routerLink="/user-status">User Status</a>
+		</li>
+		<li class="nav-item" [routerLinkActive]="['active']" *ngIf="auth.isLoggednIn() && userRole === 'admin'">
 			<a class="nav-link" routerLink="/other-details">Other Details</a>
 		</li>
 		<li class="nav-item" *ngIf="auth.isLoggednIn()">
@@ -20,5 +26,4 @@
 		</li>
 	</ul>
 </nav>
-
 <router-outlet></router-outlet>

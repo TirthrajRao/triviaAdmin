@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<h3 style="float: left;">Current App Users (Registered)</h3>
+			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="userCount">{{userCount}}</div>
+			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="!userCount">0</div>
+		</div> 
+	</div>
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<h3 style="float: left;">New Users</h3>
+			<button class="btn btn-primary" style="float: right">View All</button>
+		</div>
+	</div>
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<table class="table table-responsive">
+				<thead>
+					<th>Sr. No.</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Mobile</th>
+					<th>Date of Registeration</th>
+					<th>Time</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let user of user_array;let i=index">
+						<td>{{i+1}}</td>
+						<td>{{user.firstName}} {{user.lastName}}</td>
+						<td>{{user.email}}</td>
+						<td *ngIf="user.mobile">{{user.mobile}}</td>
+						<td *ngIf="!user.mobile">-</td>
+						<td>{{user.createdAt | date: 'dd/MM/yyyy'}}</td>
+						<td>{{user.createdAt | date: 'hh:mm a'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

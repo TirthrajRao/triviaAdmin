@@ -14,6 +14,8 @@ import { NewsComponent } from './news/news.component';
 import { SubAdminComponent } from './sub-admin/sub-admin.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { OtherDetailsComponent } from './other-details/other-details.component';
+import { PendingPostsComponent } from './pending-posts/pending-posts.component';
+import { UserStatusComponent } from './user-status/user-status.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { OtherDetailsComponent } from './other-details/other-details.component';
   CategoriesComponent,
   NewsComponent,
   SubAdminComponent,
-  OtherDetailsComponent
+  OtherDetailsComponent,
+  PendingPostsComponent,
+  UserStatusComponent
   ],
   imports: [
   HttpClientModule,
@@ -32,7 +36,8 @@ import { OtherDetailsComponent } from './other-details/other-details.component';
   BrowserModule,
   FormsModule,
   ReactiveFormsModule,
-  CKEditorModule
+  CKEditorModule,
+  // ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}) //for disabling warning on using ngModel with formcontrol 
   ],
   providers: [LoginService,AuthGuard],
   bootstrap: [AppComponent]

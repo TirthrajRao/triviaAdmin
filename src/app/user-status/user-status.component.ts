@@ -8,44 +8,31 @@ import {SubAdmin} from '../sub-admin/sub-admin';
 import {SubAdminService} from '../services/sub-admin.service';
 
 @Component({
-	selector: 'app-dashboard',
-	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.css']
+	selector: 'app-user-status',
+	templateUrl: './user-status.component.html',
+	styleUrls: ['./user-status.component.css']
 })
-export class DashboardComponent implements OnInit {
-
+export class UserStatusComponent implements OnInit {
 	fileNews:any =[];
 	error = '';
 	mediaPath = config.mediaApiUrl;
 	news_array: News[];
+	user_array: SubAdmin[];
 	url: any;
 	config: any;
 	constructor(public _newsService: NewsService,public _userService: SubAdminService) { }
 	userCount : any;
 	ngOnInit() {
-		this.getNews();
 		this.getAllUsers();
-	}
-
-
-	//get all category
-	getNews(): void{
-		this._newsService.getAllNews().subscribe(
-			(res: News[]) => {
-				this.news_array = res;
-				console.log(this.news_array);
-			},
-			(err) => {
-				this.error = err;
-			});
 	}
 
 	//get count of users
 	getAllUsers(): void{
 		this._userService.getAllUsers().subscribe(
 			(res: SubAdmin[]) => {
+				this.user_array = res;
 				this.userCount = res.length;
-				console.log(this.userCount);
+				console.log(this.user_array);
 			},
 			(err) => {
 				this.error = err;

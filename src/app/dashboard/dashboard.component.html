@@ -1,3 +1,39 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<h3 style="float: left;">Latest Trivia Posts</h3>
+			<button class="btn btn-primary" style="float: right">View All</button>
+		</div>
+	</div>
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<table class="table table-responsive">
+				<thead>
+					<th>Sr. No.</th>
+					<th>Category</th>
+					<th>Title</th>
+					<th>Date</th>
+					<th>Hindi Views</th>
+					<th>English Views</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let news of news_array | slice:-5; let i=index">
+						<td>{{i+1}}</td>
+						<td>{{news.newsCategory}}</td>
+						<td style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow:ellipsis;">{{news.newsTitleEnglish}}</td>
+						<td>12/09/2019</td>
+						<td>121</td>
+						<td>211</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row" style="margin: 15px;">
+		<div class="col-md-12">
+			<h3 style="float: left;">Current App Users (Registered)</h3>
+			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="userCount">{{userCount}}</div>
+		</div> 
+	</div>
+</div>

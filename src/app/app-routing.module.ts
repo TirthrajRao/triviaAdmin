@@ -7,6 +7,8 @@ import {CategoriesComponent} from './categories/categories.component';
 import {NewsComponent} from './news/news.component';
 import {SubAdminComponent} from './sub-admin/sub-admin.component';
 import {OtherDetailsComponent} from './other-details/other-details.component';
+import {PendingPostsComponent} from './pending-posts/pending-posts.component';
+import {UserStatusComponent} from './user-status/user-status.component';
 const routes: Routes = [
 {
 	path: '',
@@ -40,6 +42,16 @@ const routes: Routes = [
 {
 	path: 'other-details',
 	component: OtherDetailsComponent,
+	canActivate: [AuthGuard]
+},
+{
+	path: 'pending-posts',
+	component: PendingPostsComponent,
+	canActivate: [AuthGuard]
+},
+{
+	path: 'user-status',
+	component: UserStatusComponent,
 	canActivate: [AuthGuard]
 }
 ];

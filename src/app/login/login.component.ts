@@ -39,17 +39,11 @@ export class LoginComponent implements OnInit {
 		this.loginService.authorize(detail).subscribe(res=>{
 			localStorage.setItem("triviaAdmin",JSON.stringify(res));
 			this.msg = 'Logged in successfully! ';
+			setTimeout(function(){window.location.reload()}, 100);
 			this.router.navigate(['/dashboard']);
 		},err=>{
 			console.log("error",err);
 			this.errmsg = 'Incorrect info!';
 		})
-		// if(detail.email == "a@g.com" && detail.password == "123"){
-		// 	localStorage.setItem("triviaAdmin",JSON.stringify(detail.email));
-		// 	this.msg = 'Logged in successfully! ';
-		// 	this.router.navigate(['/dashboard']);
-		// }else{
-		// 	this.errmsg = 'Incorrect info!';
-		// }
 	}
 }

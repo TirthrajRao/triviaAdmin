@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { from as observableFrom } from 'rxjs';
 import {config} from '../config';
 import {SubAdmin} from '../sub-admin/sub-admin';
+import {OtherDetails} from '../other-details/otherDetails';
 
 @Injectable({
 	providedIn: 'root'
@@ -12,6 +13,7 @@ import {SubAdmin} from '../sub-admin/sub-admin';
 export class SubAdminService {
 
 	subAdminArray: SubAdmin[];
+	otherDetailsArray: OtherDetails[];
 
 	private handleError(error: HttpErrorResponse) {
 		return throwError('Error! something went wrong.');
@@ -43,5 +45,22 @@ export class SubAdminService {
 
 	addOtherDetails(data){
 		return this.http.post(config.baseApiUrl + "terms", data);
+	}
+
+	getOtherDetails():Observable<OtherDetails[]> {
+		return this.http.get(config.baseApiUrl + `terms`).pipe(
+			map((res) => {
+				this.otherDetailsArray = res['data'];
+				return this.otherDetailsArray;
+			}),
+			catchError(this.handleError));
+	}
+	getAllUsers():Observable<SubAdmin[]> {
+		return this.http.get(config.baseApiUrl + `user`).pipe(
+			map((res) => {
+				this.subAdminArray = res['data'];
+				return this.subAdminArray;
+			}),
+			catchError(this.handleError));
 	}
 }	

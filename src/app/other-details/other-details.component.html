@@ -14,6 +14,13 @@
 
 				<input type="submit" name="" (click)="extraDetails(otherDetails)" [disabled]="!details.valid">
 			</div>
+			<div class="col-md-6">
+				<div *ngFor="let other of other_details">
+					<div class="logo"><strong>Logo: </strong><img src="{{mediaPath}}{{other.logo}}" height="100px" width="100px"></div><br>
+					<div class="privacy"><strong>Privacy: </strong><span [innerHTML]="other.policy"></span></div><br>
+					<div class="terms"><strong>Terms & Condition: </strong><span [innerHTML]="other.terms"></span></div>
+				</div>
+			</div>
 		</div>
 	</form>
 </div>
