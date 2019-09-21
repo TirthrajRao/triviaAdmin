@@ -28,7 +28,7 @@ export class OtherDetailsComponent implements OnInit {
 	ngOnInit() {
 		this.config = {
 			toolbar: [
-			['Maximize'],
+			['Maximize','Bold'],
 			['NumberedList', 'BulletedList'],
 			['Cut', 'Copy'],
 			['Undo', 'Redo']
