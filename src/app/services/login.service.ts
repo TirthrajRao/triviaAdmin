@@ -9,7 +9,7 @@ import {config} from '../config';
 	providedIn: 'root'
 })
 export class LoginService {
-
+	toast: any;
 	private handleError(error: HttpErrorResponse) {
 		return throwError('Error! something went wrong.');
 	}

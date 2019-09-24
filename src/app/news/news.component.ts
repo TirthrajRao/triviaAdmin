@@ -24,20 +24,20 @@ export class NewsComponent implements OnInit {
 	url: any;
 	config: any;
 
-	
+	// 192.168.1.72
 
 	constructor(public _newsService: NewsService, public _categoryService:CategoryService) {
 	}
 
 	ngOnInit() {
-		this.config = {
-			toolbar: [
-			['Maximize'],
-			['NumberedList', 'BulletedList'],
-			['Cut', 'Copy'],
-			['Undo', 'Redo']
-			]
-		};
+		// this.config = {
+		// 	toolbar: [
+		// 	['Maximize'],
+		// 	['NumberedList', 'BulletedList'],
+		// 	['Cut', 'Copy'],
+		// 	['Undo', 'Redo']
+		// 	]
+		// };
 		this.getCategories();
 		this.getNews();
 	}
