@@ -1,3 +1,27 @@
-<p>
-  pending-posts works!
-</p>
+<div class="container">
+  <h2>Pending News</h2>
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th>Sr. No.</th>
+        <th>NewsTitle</th>
+        <th>NewsCategory</th>
+        <th>CreatedBy</th>
+        <th>CreatedAt</th>
+        <th>Approve</th>
+        <th>Reject</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let news of newList;let i=index">
+      <tr>
+        <td>{{i+1}}</td>
+        <td>{{news.newsTitleEnglish}}</td>
+        <td>{{news.newsCategory}}</td>
+        <td>{{news.createdBy.email}}</td>
+        <td>{{news.createdAt | date: 'short'}}</td>
+        <td><i class="fa fa-check-circle fa-3x" (click)="approveNews(news.newsId)" aria-hidden="true"></i></td>
+        <td><i class="fa fa-times fa-3x" (click)="rejectNews(news.newsId)" aria-hidden="true"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

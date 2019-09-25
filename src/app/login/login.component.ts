@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Router} from '@angular/router';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
-import {LoginService} from '../services/login.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from '../services/login.service';
 
 @Component({
 	selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 	submitted = false;
 	msg: string = null;
 	errmsg: string = null;
-	
+
 
 	loginForm = new FormGroup({
 		email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,14 +35,15 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	login(detail){
-		this.loginService.authorize(detail).subscribe(res=>{
-			localStorage.setItem("triviaAdmin",JSON.stringify(res));
+	login(detail) {
+		this.loginService.authorize(detail).subscribe((res: any) => {
+			localStorage.setItem("triviaAdmin", JSON.stringify(res.data.accessToken));
+			localStorage.setItem("userRole", JSON.stringify(res.data.userRole));
 			this.msg = 'Logged in successfully! ';
-			setTimeout(function(){window.location.reload()}, 100);
+			setTimeout(function () { window.location.reload() }, 100);
 			this.router.navigate(['/dashboard']);
-		},err=>{
-			console.log("error",err);
+		}, err => {
+			console.log("error", err);
 			this.errmsg = 'Incorrect info!';
 		})
 	}

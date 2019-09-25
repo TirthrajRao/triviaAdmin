@@ -1,23 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Router} from '@angular/router';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
-import {CategoryService} from '../services/category.service';
-import  * as _  from 'lodash';
-import {Categories} from './categories';
-import {config} from '../config';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoryService } from '../services/category.service';
+import * as _ from 'lodash';
+import { Categories } from './categories';
+import { config } from '../config';
 @Component({
 	selector: 'app-categories',
 	templateUrl: './categories.component.html',
 	styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-	file:any =[];
+	file: any = [];
 	category_array: Categories[];
 	singleCat: [];
 	error = '';
 	mediaPath = config.mediaApiUrl;
 	url: any;
-	constructor( public _categoryService:CategoryService) { }
+	catdata: any;
+	constructor(public _categoryService: CategoryService) { }
 
 	ngOnInit() {
 		this.getCategories();
@@ -25,27 +26,23 @@ export class CategoriesComponent implements OnInit {
 
 	category_form = new FormGroup({
 		categoryTitle: new FormControl('', Validators.required),
-		categoryImage: new FormControl('', Validators.required),
 	});
 
 	editcatr_form = new FormGroup({
 		categoryTitle: new FormControl('', Validators.required),
-		categoryImage: new FormControl('', Validators.required),
 	});
-
 
 	categories = {
 		categoryTitle: "",
-		categoryImage: ""
 	}
 
-	resetUpdateForm(){
+	resetUpdateForm() {
 		this.editcatr_form.reset();
 		this.getCategories();
 	}
 
 	//get all category
-	getCategories(): void{
+	getCategories(): void {
 		this._categoryService.getAll().subscribe(
 			(res: Categories[]) => {
 				this.category_array = res;
@@ -57,72 +54,54 @@ export class CategoriesComponent implements OnInit {
 	}
 
 	// add category
-	addCategory(){
-		const dataAdd = new FormData();
-		_.forOwn(this.category_form.value, (value, key) => {
-			dataAdd.append(key, value);
-		});
-
-		if (this.file.length > 0) {
-			console.log("=========this", this.file)
-			for (let i = 0; i <= this.file.length; i++) {
-				dataAdd.append('categoryImage', this.file[i]);
-			}
-		}
-
-		this._categoryService.addCategory(dataAdd).subscribe((res:any)=>{
-			console.log("res=========>",res);
+	addCategory(data) {
+		console.log('Data:', data);
+		this._categoryService.addCategory(data).subscribe((res: any) => {
 			this.category_form.reset();
 			this.getCategories();
-		},
-		err=>{
+		}, err => {
 			console.log(err);
 		})
 	}
 
-	cat_image(event){
+	cat_image(event) {
 		this.file = event.target.files;
 	}
 
 	//get data for edit
-	editCat(category){
+	editCat(category) {
 		console.log(category);
 		this.singleCat = category;
 	}
 
 	//delete category
-	deleteCategory(categoryId){
+	deleteCategory(categoryId) {
 		this._categoryService
-		.deleteCategory(categoryId)
-		.subscribe(() => {
-			this.getCategories();
-		})
+			.deleteCategory(categoryId)
+			.subscribe(() => {
+				this.getCategories();
+			})
 	}
 
 
 	//for upadting the category
-	updateCat(singleCat){
+	updateCat(singleCat) {
 
-		const data = new FormData();
-		_.forOwn(this.editcatr_form.value, (value, key) => {
-			data.append(key, value);
-		});
+		console.log('Single cat:', singleCat);
 
-		if (this.file.length > 0) {
-			console.log("=========this", this.file)
-			for (let i = 0; i <= this.file.length; i++) {
-				data.append('categoryImage', this.file[i]);
-			}
+		this.catdata = {
+			categoryTitle: singleCat.categoryTitle,
+			categoryId: singleCat.categoryId
 		}
-
-		this._categoryService.updateCategory(data, singleCat.categoryId).subscribe((res:any)=>{
-			console.log("res=========>",res);
+		
+		this._categoryService.updateCategory(this.catdata).subscribe((res: any) => {
+			console.log("res=========>", res);
 			this.editcatr_form.reset();
 			this.getCategories();
 		},
-		err=>{
-			console.log(err);
-		})
+			err => {
+				console.log(err);
+			})
 	}
 
 	// for image preview on edit click

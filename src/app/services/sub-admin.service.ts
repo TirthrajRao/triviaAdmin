@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { from as observableFrom } from 'rxjs';
-import {config} from '../config';
-import {SubAdmin} from '../sub-admin/sub-admin';
-import {OtherDetails} from '../other-details/otherDetails';
+import { config } from '../config';
+import { SubAdmin } from '../sub-admin/sub-admin';
+import { OtherDetails } from '../other-details/otherDetails';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,11 +22,11 @@ export class SubAdminService {
 	constructor(private http: HttpClient) { }
 
 	//add news
-	addSubAdmin(data){
+	addSubAdmin(data) {
 		return this.http.post(config.baseApiUrl + "subadmin", data);
 	}
 
-	getAll() :Observable<SubAdmin[]> {
+	getAll(): Observable<SubAdmin[]> {
 		return this.http.get(config.baseApiUrl + `subadmin`).pipe(
 			map((res) => {
 				this.subAdminArray = res['data'];
@@ -35,19 +35,19 @@ export class SubAdminService {
 			catchError(this.handleError));
 	}
 
-	deleteSubAdmin(userId){
+	deleteSubAdmin(userId) {
 		return this.http.delete(config.baseApiUrl + "subadmin?userId=" + userId);
 	}
 
-	updateSubAdmin(subAdmin){
+	updateSubAdmin(subAdmin) {
 		return this.http.put(config.baseApiUrl + "subadmin", subAdmin);
 	}
 
-	addOtherDetails(data){
+	addOtherDetails(data) {
 		return this.http.post(config.baseApiUrl + "terms", data);
 	}
 
-	getOtherDetails():Observable<OtherDetails[]> {
+	getOtherDetails(): Observable<OtherDetails[]> {
 		return this.http.get(config.baseApiUrl + `terms`).pipe(
 			map((res) => {
 				this.otherDetailsArray = res['data'];
@@ -55,12 +55,16 @@ export class SubAdminService {
 			}),
 			catchError(this.handleError));
 	}
-	getAllUsers():Observable<SubAdmin[]> {
+	getAllUsers(): Observable<SubAdmin[]> {
 		return this.http.get(config.baseApiUrl + `user`).pipe(
 			map((res) => {
 				this.subAdminArray = res['data'];
 				return this.subAdminArray;
 			}),
 			catchError(this.handleError));
+	}
+
+	getUserFeedback() {
+		return this.http.get(config.baseApiUrl + 'feedback');
 	}
 }	

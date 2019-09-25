@@ -13,9 +13,7 @@ export class LoginService {
 	private handleError(error: HttpErrorResponse) {
 		return throwError('Error! something went wrong.');
 	}
-
-
-
+	
 	constructor(private http: HttpClient) { }
 
 	authorize(detail){

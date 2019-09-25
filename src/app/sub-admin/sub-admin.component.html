@@ -5,19 +5,41 @@
 			<h3>Add Sub-Admin</h3>
 			<!-- add subadmin form-->
 			<form [formGroup]="subadminForm">
-				<input type="text" formControlName="firstName" [(ngModel)]="subadmin.firstName" placeholder="First Name"><br><br>
-				<input type="text" formControlName="lastName" [(ngModel)]="subadmin.lastName" placeholder="Last Name"><br><br>
-				<input type="text" formControlName="email" [(ngModel)]="subadmin.email"placeholder="Email"><br><br>
-				<input type="text" formControlName="password" [(ngModel)]="subadmin.password" placeholder="Admin Password"><br><br>
-				<input type="submit" name="categories_submit" [disabled]="!subadminForm.valid" (click)="addSubAdmin(subadmin)" class="btn btn-primary">
+
+				<div class="form-group">
+					<label for="usr">First Name:</label>
+					<input type="text" class="form-control" formControlName="firstName" [(ngModel)]="subadmin.firstName"
+						placeholder="First Name">
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Last Name:</label>
+					<input type="text" class="form-control" formControlName="lastName" [(ngModel)]="subadmin.lastName"
+						placeholder="Last Name">
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Email:</label>
+					<input type="email" class="form-control" formControlName="email" [(ngModel)]="subadmin.email"
+						placeholder="Email">
+				</div>
+
+				<div class="form-group">
+					<label for="pwd">Password:</label>
+					<input type="password" class="form-control" formControlName="password"
+						[(ngModel)]="subadmin.password" placeholder="Password">
+				</div>
+
+				<input type="submit" name="categories_submit" [disabled]="!subadminForm.valid"
+					(click)="addSubAdmin(subadmin)" class="btn btn-primary ">
 			</form>
 		</div>
 
 		<div class="col-md-6">
-			<h3>All Sub-Admin</h3>
+			<h3>Sub-Admin List</h3>
 
 			<!-- displays all subadmin -->
-			<table border="1" class="table">
+			<table class="table table-striped">
 				<thead>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -29,8 +51,10 @@
 						<td>{{subadmin.firstName}}</td>
 						<td>{{subadmin.lastName}}</td>
 						<td>{{subadmin.email}}</td>
-						<td><a style="color: blue" data-toggle="modal" data-target="#myModal" (click)="editSubAdmin(subadmin)">Edit</a></td>
-						<td><a style="color: red" (click)="deleteSubAdmin(subadmin.userId)">Delete</a></td>
+						<td> <i class="fas fa-edit" aria-hidden="true" data-toggle="modal" data-target="#myModal"
+								(click)="editSubAdmin(subadmin)"></i></td>
+						<td><i class="fas fa-trash" (click)="deleteSubAdmin(subadmin.userId)"></i>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -45,20 +69,23 @@
 			<div class="modal-body">
 				<h5>Update:</h5>
 				<form [formGroup]="editsubadminForm" *ngIf="singleSubAdmin">
+						<input type="text" id="hey" value="{{singleSubAdmin.userId}}" hidden>
 
 					First Name:<br>
-					<input type="text"  formControlName="firstName"  [(ngModel)]="singleSubAdmin.firstName"><br><br>
+					<input type="text" formControlName="firstName" [(ngModel)]="singleSubAdmin.firstName"><br><br>
 
 					Last Name:<br>
-					<input type="text"  formControlName="lastName"  [(ngModel)]="singleSubAdmin.lastName"><br><br>
-					
-					Email:<br>	
-					<input type="text"  formControlName="email"  [(ngModel)]="singleSubAdmin.email"><br><br>
+					<input type="text" formControlName="lastName" [(ngModel)]="singleSubAdmin.lastName"><br><br>
+
+					Email:<br>
+					<input type="text" formControlName="email" [(ngModel)]="singleSubAdmin.email"><br><br>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateSubAdmin(singleSubAdmin)">Update</button>
-				<button type="button" class="btn btn-warning" data-dismiss="modal" (click)="resetUpdateForm()">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"
+					(click)="updateSubAdmin(editsubadminForm.value )">Update</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal"
+					(click)="resetUpdateForm()">Close</button>
 			</div>
 		</div>
 	</div>

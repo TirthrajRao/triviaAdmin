@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Router} from '@angular/router';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
-import {SubAdminService} from '../services/sub-admin.service';
-import  * as _  from 'lodash';
-import {config} from '../config';
-import {SubAdmin} from './sub-admin';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SubAdminService } from '../services/sub-admin.service';
+import * as _ from 'lodash';
+import { config } from '../config';
+import { SubAdmin } from './sub-admin';
+import Swal from 'sweetalert2';
+declare var $;
+
+
 @Component({
   selector: 'app-sub-admin',
   templateUrl: './sub-admin.component.html',
@@ -14,25 +18,40 @@ export class SubAdminComponent implements OnInit {
   subadmin_array: SubAdmin[];
   error: any;
   singleSubAdmin: [];
-  constructor(public _subAdminService: SubAdminService) { }
+  subadminForm: FormGroup;
+  editsubadminForm: FormGroup;
+  constructor(public _subAdminService: SubAdminService) {
+    this.subadminForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
+    this.editsubadminForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      // password: new FormControl('', Validators.required),
+    });
+
+  }
 
   ngOnInit() {
     this.getSubAdmin();
+    var self = this;
+    this.getSubAdmin();
+    $(document).on('click', 'body *', function () {
+      // console.log("Hey");
+      self.hello();
+    });
   }
 
-  subadminForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
-
-  editsubadminForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
+  hello() {
+    if (this.singleSubAdmin) {
+      this.getSubAdmin();
+      // console.log("hey 2");
+    }
+  }
 
   subadmin = {
     email: "",
@@ -42,18 +61,26 @@ export class SubAdminComponent implements OnInit {
   }
 
   //sub admin
-  addSubAdmin(data){
-    this._subAdminService.addSubAdmin(data).subscribe((res:any)=>{
+  addSubAdmin(data) {
+    this._subAdminService.addSubAdmin(data).subscribe((res: any) => {
       this.subadminForm.reset();
+
+      Swal.fire({
+        type: 'success',
+        title: res.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+
       this.getSubAdmin();
     },
-    err=>{
-      console.log(err);
-    })
+      err => {
+        console.log(err);
+      })
   }
 
   //get all subadmin
-  getSubAdmin(): void{
+  getSubAdmin(): void {
     this._subAdminService.getAll().subscribe(
       (res: SubAdmin[]) => {
         this.subadmin_array = res;
@@ -64,30 +91,45 @@ export class SubAdminComponent implements OnInit {
   }
 
   //delete subAdmin
-  deleteSubAdmin(userId){
-    this._subAdminService.deleteSubAdmin(userId).subscribe(() => {
+  deleteSubAdmin(userId) {
+    this._subAdminService.deleteSubAdmin(userId).subscribe((res: any) => {
+      Swal.fire({
+        type: 'success',
+        title: res.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
       this.getSubAdmin();
     })
   }
 
-  editSubAdmin(subadmin){
+  editSubAdmin(subadmin) {
+    console.log("edit user fdetails ", subadmin)
     this.singleSubAdmin = subadmin;
   }
-  
-  resetUpdateForm(){
+
+  resetUpdateForm() {
     this.editsubadminForm.reset();
     this.getSubAdmin();
   }
 
-  updateSubAdmin(subAdmin){
+  updateSubAdmin(subAdmin) {
+    subAdmin["userId"] = (<HTMLInputElement>document.getElementById("hey")).value;
+
     console.log(subAdmin);
-    this._subAdminService.updateSubAdmin(subAdmin).subscribe((res:any)=>{
-      console.log("res=========>",res);
+    this._subAdminService.updateSubAdmin(subAdmin).subscribe((res: any) => {
+      console.log("res=========>", res);
+      Swal.fire({
+        type: 'success',
+        title: res.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
       this.editsubadminForm.reset();
       this.getSubAdmin();
     },
-    err=>{
-      console.log(err);
-    })
+      err => {
+        console.log(err);
+      })
   }
 }
