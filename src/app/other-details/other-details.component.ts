@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Router} from '@angular/router';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
-import  * as _  from 'lodash';
-import {config} from '../config';
-import {CKEditor4} from  'ckeditor4-angular';
-import {SubAdminService} from '../services/sub-admin.service';
-import {OtherDetails} from './otherDetails';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import * as _ from 'lodash';
+import { config } from '../config';
+import { CKEditor4 } from 'ckeditor4-angular';
+import { SubAdminService } from '../services/sub-admin.service';
+import { OtherDetails } from './otherDetails';
 @Component({
 	selector: 'app-other-details',
 	templateUrl: './other-details.component.html',
@@ -13,7 +13,7 @@ import {OtherDetails} from './otherDetails';
 })
 export class OtherDetailsComponent implements OnInit {
 	config: any;
-	fileLogo:any =[];
+	fileLogo: any = [];
 	error = '';
 	mediaPath = config.mediaApiUrl;
 	other_details: OtherDetails[];
@@ -28,10 +28,10 @@ export class OtherDetailsComponent implements OnInit {
 	ngOnInit() {
 		this.config = {
 			toolbar: [
-			['Maximize','Bold'],
-			['NumberedList', 'BulletedList'],
-			['Cut', 'Copy'],
-			['Undo', 'Redo']
+				['Maximize', 'Bold'],
+				['NumberedList', 'BulletedList'],
+				['Cut', 'Copy'],
+				['Undo', 'Redo']
 			]
 		};
 
@@ -44,7 +44,7 @@ export class OtherDetailsComponent implements OnInit {
 		policy: ""
 	}
 
-	extraDetails(otherDetails){
+	extraDetails(otherDetails) {
 		const data = new FormData();
 		_.forOwn(this.details.value, (value, key) => {
 			data.append(key, value);
@@ -56,20 +56,20 @@ export class OtherDetailsComponent implements OnInit {
 			}
 		}
 
-		this._subAdmin.addOtherDetails(data).subscribe((res:any)=>{
+		this._subAdmin.addOtherDetails(data).subscribe((res: any) => {
 			this.details.reset();
-		},
-		err=>{
+			this.getOtherDetails();
+		}, err => {
 			console.log(err);
 		})
 	}
 
-	logoImage(event){
+	logoImage(event) {
 		this.fileLogo = event.target.files;
 	}
 
 	//get all category
-	getOtherDetails(): void{
+	getOtherDetails(): void {
 		this._subAdmin.getOtherDetails().subscribe(
 			(res: OtherDetails[]) => {
 				this.other_details = res;

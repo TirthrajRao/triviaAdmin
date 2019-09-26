@@ -23,6 +23,8 @@ export class UserStatusComponent implements OnInit {
 	config: any;
 	constructor(public _newsService: NewsService, public _userService: SubAdminService) { }
 	userCount: any;
+	p: Number = 1;
+	Page: Number = 1;
 	ngOnInit() {
 		this.getAllUsers();
 		this.getUserFeedback();

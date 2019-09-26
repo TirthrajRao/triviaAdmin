@@ -22,14 +22,14 @@
 								name="categoryImage" required="required" (change)="news_image($event)">
 						</div>
 					</div>
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<select formControlName="categoryId" class="form-control form-control-sm">
 							<option selected="selected" disabled="disabled" value="">Choose Post Template</option>
 							<option>Short News</option>
 							<option>Two Slides</option>
 							<option>Multiple Slides</option>
 						</select>
-					</div>
+					</div> -->
 
 				</div>
 
@@ -77,7 +77,7 @@
 					<th>News Status</th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let news of news_array">
+					<tr *ngFor="let news of news_array | paginate: { itemsPerPage: 5, currentPage: p }">
 						<td>{{news.newsTitleEnglish}}</td>
 						<td>
 							<div [innerHTML]="news.newsEnglish"></div>
@@ -88,6 +88,8 @@
 						<td>{{news.isApproved}}</td>
 					</tr>
 				</tbody>
+				<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
 			</table>
 		</div>
 
@@ -104,18 +106,25 @@
 				<h5>Update News</h5>
 				<form [formGroup]="editnews_form" *ngIf="singleNews">
 					<input type="text" id="hey" hidden value="{{singleNews.newsId}}">
-					Title (En): <input class="form-control form-control-sm" type="text"
-						formControlName="newsTitleEnglish" [(ngModel)]="singleNews.newsTitleEnglish"><br><br>
 
-					Title (Hindi): <input class="form-control form-control-sm" type="text"
-						formControlName="newsTitleHindi" [(ngModel)]="singleNews.newsTitleHindi"><br><br>
+					<div class="form-group">
+						<label for="usr">Title (En):</label>
+						<input class="form-control form-control-sm" type="text" formControlName="newsTitleEnglish"
+							[(ngModel)]="singleNews.newsTitleEnglish">
+					</div>
+
+					<div class="form-group">
+						<label for="usr">Title (Hindi):</label>
+						<input class="form-control form-control-sm" type="text" formControlName="newsTitleHindi"
+							[(ngModel)]="singleNews.newsTitleHindi">
+					</div>
 
 					<div class="row">
 						<div class="col-md-12">
-							<select class="browser-default custom-select custom-select-lg mb-1"
+							<select class="browser-default custom-select custom-select-md mb-1"
 								formControlName="categoryId" *ngIf="singleNews.newsCategoryId"
 								[(ngModel)]="singleNews.newsCategoryId">
-								<option>Select Category</option>
+								<option selected="selected" disabled="disabled" value="">Choose category</option>
 								<option *ngFor="let category of category_array" value="{{category.categoryId}}">
 									{{category.categoryTitle}}
 								</option>

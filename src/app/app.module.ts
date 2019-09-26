@@ -17,6 +17,7 @@ import { OtherDetailsComponent } from './other-details/other-details.component';
 import { PendingPostsComponent } from './pending-posts/pending-posts.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
+    NgxPaginationModule
     // ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}) //for disabling warning on using ngModel with formcontrol 
   ],
   providers: [LoginService, AuthGuard,

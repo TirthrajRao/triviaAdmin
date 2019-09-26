@@ -14,7 +14,7 @@ declare var $;
 @Component({
 	selector: 'app-news',
 	templateUrl: './news.component.html',
-	styleUrls: ['./news.component.css']
+	styleUrls: ['./news.component.css'],
 })
 export class NewsComponent implements OnInit {
 	fileNews: any = [];
@@ -28,8 +28,7 @@ export class NewsComponent implements OnInit {
 	userRole: any;
 	news_form: FormGroup;
 	editnews_form: FormGroup;
-	// 192.168.1.72
-
+	P: Number = 1;
 	constructor(public _newsService: NewsService, public _categoryService: CategoryService) {
 		this.news_form = new FormGroup({
 			newsTitleEnglish: new FormControl('', Validators.required),

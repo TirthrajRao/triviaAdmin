@@ -39,7 +39,7 @@
 			<h3>Sub-Admin List</h3>
 
 			<!-- displays all subadmin -->
-			<table class="table table-striped">
+			<table class="table table-striped table-responsive">
 				<thead>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -67,18 +67,28 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-body">
-				<h5>Update:</h5>
+				<h5>Update Sub-Admin</h5>
+
 				<form [formGroup]="editsubadminForm" *ngIf="singleSubAdmin">
-						<input type="text" id="hey" value="{{singleSubAdmin.userId}}" hidden>
+					<input type="text" id="hey" value="{{singleSubAdmin.userId}}" hidden>
 
-					First Name:<br>
-					<input type="text" formControlName="firstName" [(ngModel)]="singleSubAdmin.firstName"><br><br>
+					<div class="form-group">
+						<label for="pwd">First Name:</label>
+						<input class="form-control" type="text" formControlName="firstName"
+							[(ngModel)]="singleSubAdmin.firstName">
+					</div>
 
-					Last Name:<br>
-					<input type="text" formControlName="lastName" [(ngModel)]="singleSubAdmin.lastName"><br><br>
+					<div class="form-group">
+						<label for="pwd">Last Name:</label>
+						<input class="form-control" type="text" formControlName="lastName"
+							[(ngModel)]="singleSubAdmin.lastName">
+					</div>
 
-					Email:<br>
-					<input type="text" formControlName="email" [(ngModel)]="singleSubAdmin.email"><br><br>
+					<div class="form-group">
+						<label for="pwd">Email:</label>
+						<input class="form-control" type="text" formControlName="email"
+							[(ngModel)]="singleSubAdmin.email">
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">

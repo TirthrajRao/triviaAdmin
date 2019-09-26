@@ -5,8 +5,8 @@
 			<h3>Add Category</h3>
 			<!-- add category form-->
 			<form [formGroup]="category_form">
-				<input type="text" formControlName="categoryTitle" class="form-control"
-					required="required" placeholder="Category Title" [(ngModel)]="categories.categoryTitle"><br><br>
+				<input type="text" formControlName="categoryTitle" class="form-control" required="required"
+					placeholder="Category Title" [(ngModel)]="categories.categoryTitle"><br><br>
 				<button type="submit" class="btn btn-primary" name="categories_submit" (click)="addCategory(categories)"
 					[disabled]="!category_form.valid">Save</button>
 			</form>
@@ -43,6 +43,7 @@
 			<div class="modal-body">
 				<h5>Update:</h5>
 				<form [formGroup]="editcatr_form" *ngIf="singleCat">
+					<input type="text" id="hey" value="{{singleCat.categoryId}}" hidden>
 					<input type="text" formControlName="categoryTitle" [(ngModel)]="singleCat.categoryTitle"><br><br>
 				</form>
 			</div>

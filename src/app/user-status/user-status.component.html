@@ -26,17 +26,19 @@
 					<th>Time</th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let user of user_array;let i=index">
+					<tr
+						*ngFor="let User of user_array|paginate: {id: 'pagination1', itemsPerPage: 5, currentPage: p };let i=index">
 						<td>{{i+1}}</td>
-						<td>{{user.userName}}</td>
-						<td>{{user.email}}</td>
-						<td *ngIf="user.mobile">{{user.mobile}}</td>
-						<td *ngIf="!user.mobile">-</td>
-						<td>{{user.createdAt | date: 'dd/MM/yyyy'}}</td>
-						<td>{{user.createdAt | date: 'hh:mm a'}}</td>
+						<td>{{User.userName}}</td>
+						<td>{{User.email}}</td>
+						<td *ngIf="User.mobile">{{User.mobile}}</td>
+						<td *ngIf="!User.mobile">-</td>
+						<td>{{User.createdAt | date: 'dd/MM/yyyy'}}</td>
+						<td>{{User.createdAt | date: 'hh:mm a'}}</td>
 					</tr>
 				</tbody>
 			</table>
+			<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
 		</div>
 	</div>
 
@@ -58,7 +60,8 @@
 					<th>Submitted At</th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let user of feedback_array;let i=index">
+					<tr
+						*ngFor="let user of feedback_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
 						<td>{{i+1}}</td>
 						<td>{{user.name}}</td>
 						<td>{{user.email}}</td>
@@ -69,6 +72,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
 		</div>
 	</div>
 </div>

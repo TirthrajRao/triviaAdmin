@@ -5,6 +5,9 @@ import { CategoryService } from '../services/category.service';
 import * as _ from 'lodash';
 import { Categories } from './categories';
 import { config } from '../config';
+import Swal from 'sweetalert2';
+declare var $;
+
 @Component({
 	selector: 'app-categories',
 	templateUrl: './categories.component.html',
@@ -22,6 +25,16 @@ export class CategoriesComponent implements OnInit {
 
 	ngOnInit() {
 		this.getCategories();
+		var self = this;
+		$(document).on('click', 'body *', function () {
+			self.hello();
+		});
+	}
+
+	hello() {
+		if (this.singleCat) {
+			this.getCategories();
+		}
 	}
 
 	category_form = new FormGroup({
@@ -57,6 +70,13 @@ export class CategoriesComponent implements OnInit {
 	addCategory(data) {
 		console.log('Data:', data);
 		this._categoryService.addCategory(data).subscribe((res: any) => {
+			Swal.fire({
+				type: 'success',
+				title: res.message,
+				showConfirmButton: false,
+				timer: 2000
+			})
+
 			this.category_form.reset();
 			this.getCategories();
 		}, err => {
@@ -78,7 +98,14 @@ export class CategoriesComponent implements OnInit {
 	deleteCategory(categoryId) {
 		this._categoryService
 			.deleteCategory(categoryId)
-			.subscribe(() => {
+			.subscribe((res: any) => {
+				Swal.fire({
+					type: 'success',
+					title: res.message,
+					showConfirmButton: false,
+					timer: 2000
+				})
+
 				this.getCategories();
 			})
 	}
@@ -93,10 +120,17 @@ export class CategoriesComponent implements OnInit {
 			categoryTitle: singleCat.categoryTitle,
 			categoryId: singleCat.categoryId
 		}
-		
+
 		this._categoryService.updateCategory(this.catdata).subscribe((res: any) => {
 			console.log("res=========>", res);
 			this.editcatr_form.reset();
+			Swal.fire({
+				type: 'success',
+				title: res.message,
+				showConfirmButton: false,
+				timer: 2000
+			})
+
 			this.getCategories();
 		},
 			err => {
