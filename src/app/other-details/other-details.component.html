@@ -1,24 +1,29 @@
 <div class="container"><br>
 	<form [formGroup]="details">
 		<div class="row">
-			<div class="col-md-6">
-
-				App logo:
-				<input type="file" formControlName="logo" [(ngModel)]="otherDetails.logo" (change)="logoImage($event)"><br><br>
-
-				Privacy Policy:
-				<ckeditor  [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy"></ckeditor><br><br>
-
-				Terms and Condition:
-				<ckeditor  [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"></ckeditor><br><br>
-
-				<input type="submit" name="" (click)="extraDetails(otherDetails)" [disabled]="!details.valid">
+			<div class="col-12">
+				<span class="text-dark">App logo: </span>
+				<input type="file" formControlName="logo" [(ngModel)]="otherDetails.logo" (change)="logoImage($event)">
 			</div>
 			<div class="col-md-6">
-				<div *ngFor="let other of other_details">
-					<div class="logo"><strong>Logo: </strong><img src="{{mediaPath}}{{other.logo}}" height="100px" width="100px"></div><br>
-					<div class="privacy"><strong>Privacy: </strong><span [innerHTML]="other.policy"></span></div><br>
-					<div class="terms"><strong>Terms & Condition: </strong><span [innerHTML]="other.terms"></span></div>
+				<h6 class="text-primary">Privacy Policy: </h6>
+				<ckeditor [config]="config" formControlName="policy" [(ngModel)]="otherDetails.policy"></ckeditor>
+			</div>
+			<div class="col-md-6">
+				<h6 class="text-primary">Terms and Condition:</h6>
+				<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"></ckeditor>
+			</div>
+
+			<div class="col-md-6 privacy" *ngFor="let other of other_details">
+				<h3 class="text-primary">Privacy: </h3>
+				<div class="card p-3">
+					<span [innerHTML]="other.policy"></span>
+				</div>
+			</div>
+			<div class="col-md-6 terms" *ngFor="let other of other_details">
+				<h3 class="text-primary">Terms & Condition: </h3>
+				<div class="card p-3">
+					<span [innerHTML]="other.terms"></span>
 				</div>
 			</div>
 		</div>

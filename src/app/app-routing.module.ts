@@ -22,7 +22,7 @@ const routes: Routes = [
 {
 	path: 'dashboard',
 	component: DashboardComponent,
-	canActivate: [AuthGuard]
+	// canActivate: [AuthGuard]
 },
 {
 	path: 'categories',
@@ -32,7 +32,7 @@ const routes: Routes = [
 {
 	path: 'trivia-posts',
 	component: NewsComponent,
-	canActivate: [AuthGuard]
+	// canActivate: [AuthGuard]
 },
 {
 	path: 'sub-admin',

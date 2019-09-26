@@ -16,7 +16,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(localStorage.getItem("triviaAdmin"));
-    this.userRole = JSON.parse(localStorage.getItem("userRole"));
+    this.userRole = JSON.parse(localStorage.getItem("adminRole"));
     
     this.cdRef.detectChanges();
     if (this.loggedInUser) {
@@ -27,7 +27,8 @@ export class AppComponent {
   }
 
   Logout() {
-    localStorage.removeItem("triviaAdmin");
+    localStorage.clear();
+    // localStorage.removeItem("triviaAdmin");
     this.loggedIn = false;
     this.router.navigate(['/login']);
   }

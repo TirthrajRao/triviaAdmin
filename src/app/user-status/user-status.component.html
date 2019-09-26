@@ -1,78 +1,82 @@
 <div class="container">
 	<div class="row" style="margin: 15px;">
 		<div class="col-md-12">
-			<h3 style="float: left;">Current App Users (Registered)</h3>
-			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="userCount">
+			<h3 style="float: left;">Current App Users</h3>
+			<div style="float: left; margin-top: 13px; padding: 0px 7px; border-radius: 50%; color: white; background-color: #c51c24;"
+				*ngIf="userCount">
 				{{userCount}}</div>
-			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="!userCount">0
+			<div style="float: left; margin-top: 13px;padding: 0px 7px; border-radius: 50%;color: white; background-color: #c51c24;"
+				*ngIf="!userCount">0
 			</div>
 		</div>
 	</div>
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<h3 style="float: left;">New Users</h3>
-			<button class="btn btn-primary" style="float: right">View All</button>
+	<div class="card" id="allRecords">
+		<div class="card-header card-header-primary">
+			<h4 class="card-title ">New Users</h4>
 		</div>
-	</div>
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<table class="table table-responsive">
-				<thead>
-					<th>Sr. No.</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile</th>
-					<th>Date of Registeration</th>
-					<th>Time</th>
-				</thead>
-				<tbody>
-					<tr
-						*ngFor="let User of user_array|paginate: {id: 'pagination1', itemsPerPage: 5, currentPage: p };let i=index">
-						<td>{{i+1}}</td>
-						<td>{{User.userName}}</td>
-						<td>{{User.email}}</td>
-						<td *ngIf="User.mobile">{{User.mobile}}</td>
-						<td *ngIf="!User.mobile">-</td>
-						<td>{{User.createdAt | date: 'dd/MM/yyyy'}}</td>
-						<td>{{User.createdAt | date: 'hh:mm a'}}</td>
-					</tr>
-				</tbody>
-			</table>
-			<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+		<div class="card-body">
+			<div class="table table-responsive">
+				<table class="table">
+					<thead>
+						<th>Sr. No.</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Mobile</th>
+						<th>Date of Registeration</th>
+						<th>Time</th>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let User of user_array|paginate: {id: 'pagination1', itemsPerPage: 5, currentPage: p };let i=index">
+							<td>{{(5*(p-1)+i)+1}} </td>
+							<td>{{User.userName}}</td>
+							<td>{{User.email}}</td>
+							<td *ngIf="User.mobile">{{User.mobile}}</td>
+							<td *ngIf="!User.mobile">-</td>
+							<td>{{User.createdAt | date: 'dd/MM/yyyy'}}</td>
+							<td>{{User.createdAt | date: 'hh:mm a'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="justify-content-center w-100">
+					<pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+				</div>
+			</div>
 		</div>
 	</div>
 
+	<div class="card" id="allRecords">
+		<div class="card-header card-header-primary">
+			<h4 class="card-title ">User Feedback</h4>
+		</div>
+		<div class="card-body">
+			<div class="table table-responsive">
+				<table class="table">
+					<thead>
+						<th>Sr. No.</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Mobile</th>
+						<th>Message</th>
+						<th>Submitted At</th>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let user of feedback_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+							<td>{{(5*(Page-1)+i)+1}} </td>
+							<td>{{user.name}}</td>
+							<td>{{user.email}}</td>
+							<td *ngIf="user.mobile">{{user.mobile}}</td>
+							<td *ngIf="!user.mobile">-</td>
+							<td>{{user.message}}</td>
+							<td>{{user.createdAt | date: 'short'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="justify-content-center w-100">
+					<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+				</div>
 
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<h3 style="float: left;">User Feedback</h3>
+			</div>
 		</div>
 	</div>
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<table class="table table-responsive table-striped">
-				<thead>
-					<th>Sr. No.</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile</th>
-					<th>Message</th>
-					<th>Submitted At</th>
-				</thead>
-				<tbody>
-					<tr
-						*ngFor="let user of feedback_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
-						<td>{{i+1}}</td>
-						<td>{{user.name}}</td>
-						<td>{{user.email}}</td>
-						<td *ngIf="user.mobile">{{user.mobile}}</td>
-						<td *ngIf="!user.mobile">-</td>
-						<td>{{user.message}}</td>
-						<td>{{user.createdAt | date: 'short'}}</td>
-					</tr>
-				</tbody>
-			</table>
-			<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
-		</div>
-	</div>
-</div>

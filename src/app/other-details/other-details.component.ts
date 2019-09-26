@@ -13,7 +13,7 @@ import { OtherDetails } from './otherDetails';
 })
 export class OtherDetailsComponent implements OnInit {
 	config: any;
-	fileLogo: any = [];
+	fileLogo: any = [];	
 	error = '';
 	mediaPath = config.mediaApiUrl;
 	other_details: OtherDetails[];

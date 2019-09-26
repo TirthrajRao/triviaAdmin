@@ -23,11 +23,12 @@ export class DashboardComponent implements OnInit {
 	config: any;
 	constructor(public _newsService: NewsService, public _userService: SubAdminService) { }
 	userCount: any;
+	postCount: any;
 	ngOnInit() {
 		this.getNews();
 		this.getAllUsers();
 
-		
+
 	}
 
 
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
 		this._newsService.getAllNews().subscribe(
 			(res: News[]) => {
 				this.news_array = res;
+				this.postCount = res.length
 				console.log(this.news_array);
 			},
 			(err) => {

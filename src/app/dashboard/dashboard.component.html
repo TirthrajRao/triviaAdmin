@@ -1,14 +1,45 @@
-<div class="container">
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<h3 style="float: left;">Latest Trivia Posts</h3>
-			<button class="btn btn-primary" style="float: right" routerLink="/trivia-posts">View All</button>
+<div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-header card-header-warning card-header-icon">
+				<div class="card-icon">
+					<i class="fa fa-user" aria-hidden="true"></i>
+				</div>
+				<h3 class="card-title">Total Users {{userCount}}</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<a style="cursor: pointer;color: #cb293f" routerLink="/user-status">View Details</a>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<table class="table table-responsive">
-				<thead>
+
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="card card-stats">
+			<div class="card-header card-header-warning card-header-icon">
+				<div class="card-icon">
+					<i class="fa fa-newspaper-o"></i>
+				</div>
+				<h3 class="card-title">Total News Post {{postCount}}</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<a style="cursor: pointer;color: #cb293f" routerLink="/trivia-posts">View Details</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<button class="btn btn-primary mb-5" style="float: right" routerLink="/trivia-posts">View All</button>
+<div class="card" id="allRecords">
+	<div class="card-header card-header-primary">
+		<h4 class="card-title ">Latest Trivia Posts</h4>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="text-primary">
 					<th>Sr. No.</th>
 					<th>Category</th>
 					<th>Title</th>
@@ -27,14 +58,6 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-	</div>
-
-	<div class="row" style="margin: 15px;">
-		<div class="col-md-12">
-			<h3 style="float: left;">Current App Users (Registered)</h3>
-			<div style="float: left;border: 1px solid black; margin-left: 5px;padding: 0px 5px;" *ngIf="userCount">
-				{{userCount}}</div>
 		</div>
 	</div>
 </div>

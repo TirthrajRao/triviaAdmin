@@ -1,0 +1,5 @@
+.privacy .card,
+.terms .card{
+    max-height: 300px;
+    overflow-y: scroll; 
+}
