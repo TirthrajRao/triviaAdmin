@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         const accessToken = JSON.parse(localStorage.getItem('triviaAdmin'));
 
-        console.log("Interceptor AccessToken", accessToken);
+        // console.log("Interceptor AccessToken", accessToken);
 
         if (accessToken) {
             const cloned = req.clone({
@@ -31,7 +31,6 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(cloned)
                 .pipe(
                     map((response: HttpResponse<any>) => {
-                        console.log("Interceptor Response:", response);
                         return response;
                     }),
 
@@ -53,13 +52,13 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(req)
                 .pipe(
                     map((event: HttpResponse<any>) => {
-                        console.log("interceptorsssssssssss events mdse ???", event);
+                        // console.log("interceptorsssssssssss events mdse ???", event);
                         return event;
                     }),
                     catchError((error: HttpErrorResponse) => {
-                        console.log("interceptorsssssssss error in login", error);
+                        // console.log("interceptorsssssssss error in login", error);
                         let errorMessage = error.error.message;
-                        console.log("dkjsbkjsbbskfbdsbfbdsf", errorMessage);
+                        // console.log("dkjsbkjsbbskfbdsbfbdsf", errorMessage);
                         if (error.status === 401) {
                             /**
                              * Alert of every error response

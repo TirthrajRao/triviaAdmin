@@ -137,10 +137,8 @@ export class NewsComponent implements OnInit {
 	}
 
 	editNews(news) {
-		console.log(news)
 		this.singleNews = news;
-
-		this.editnews_form.controls.categoryId.setValue(this.singleNews.newsCategory);
+		console.log(this.singleNews);
 	}
 
 	//delete news

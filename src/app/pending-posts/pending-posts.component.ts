@@ -18,8 +18,7 @@ export class PendingPostsComponent implements OnInit {
   ngOnInit() {
     this.getPendingNews();
   }
-
-
+  
   //get all category
   getPendingNews(): void {
     this._newsService.getAllPendingNews().subscribe((res: any) => {

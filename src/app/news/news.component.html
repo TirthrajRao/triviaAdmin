@@ -101,19 +101,21 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-body">
-				<h5>Update:</h5>
+				<h5>Update News</h5>
 				<form [formGroup]="editnews_form" *ngIf="singleNews">
 					<input type="text" id="hey" hidden value="{{singleNews.newsId}}">
-					Title (En): <input type="text" formControlName="newsTitleEnglish"
-						[(ngModel)]="singleNews.newsTitleEnglish"><br><br>
+					Title (En): <input class="form-control form-control-sm" type="text"
+						formControlName="newsTitleEnglish" [(ngModel)]="singleNews.newsTitleEnglish"><br><br>
 
-					Title (Hindi): <input type="text" formControlName="newsTitleHindi"
-						[(ngModel)]="singleNews.newsTitleHindi"><br><br>
+					Title (Hindi): <input class="form-control form-control-sm" type="text"
+						formControlName="newsTitleHindi" [(ngModel)]="singleNews.newsTitleHindi"><br><br>
 
 					<div class="row">
 						<div class="col-md-12">
-							<select formControlName="categoryId" [(ngModel)]="singleNews.categoryTitle">
-								<!-- <option selected="selected" disabled="disabled" value="">Choose category</option> -->
+							<select class="browser-default custom-select custom-select-lg mb-1"
+								formControlName="categoryId" *ngIf="singleNews.newsCategoryId"
+								[(ngModel)]="singleNews.newsCategoryId">
+								<option>Select Category</option>
 								<option *ngFor="let category of category_array" value="{{category.categoryId}}">
 									{{category.categoryTitle}}
 								</option>
@@ -135,7 +137,7 @@
 						<img [src]="url" height="50px" width="50px">
 					</div>
 					<div class="col-md-6" *ngIf="!url">
-						<img src="{{mediaPath}}{{singleNews.newsImage}}" height="50px" width="50px">
+						<img src="{{mediaPath}}{{singleNews.newsImage}}" height="100px" width="100px">
 					</div>
 				</form>
 			</div>
