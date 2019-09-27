@@ -38,16 +38,11 @@ export class LoginComponent implements OnInit {
 	login(detail) {
 		this.loginService.authorize(detail).subscribe((res: any) => {
 			console.log("login user response", res);
-			if (res.data.userRole == 'subadmin') {
-				localStorage.setItem("subadminRole", JSON.stringify(res.data.userRole));
-			}
-			else{
-				localStorage.setItem("adminRole", JSON.stringify(res.data.userRole));
-			}
-			this.msg = 'Logged in successfully! ';
+			localStorage.setItem("userRole", JSON.stringify(res.data.userRole));
 			localStorage.setItem("triviaAdmin", JSON.stringify(res.data.accessToken));
-			// setTimeout(function () { window.location.reload() }, 1);
+			this.msg = 'Logged in successfully! ';
 			this.router.navigate(['/dashboard']);
+			// setTimeout(function () { window.location.reload() }, 1);
 		}, err => {
 			console.log("error", err);
 			this.errmsg = 'Incorrect info!';

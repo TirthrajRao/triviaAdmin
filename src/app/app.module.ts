@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginService } from './services/login.service';
 import { CategoryService } from './services/category.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard, AdminGuard } from './auth.guard';
 import { CategoriesComponent } from './categories/categories.component';
 import { NewsComponent } from './news/news.component';
 import { SubAdminComponent } from './sub-admin/sub-admin.component';
@@ -43,7 +43,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule
     // ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}) //for disabling warning on using ngModel with formcontrol 
   ],
-  providers: [LoginService, AuthGuard,
+  providers: [LoginService, AuthGuard, AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -51,4 +51,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ngOnInit(){
+  console.log("helloooo=======")
+}
+
+
+ }

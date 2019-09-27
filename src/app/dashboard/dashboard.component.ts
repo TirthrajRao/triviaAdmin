@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
 	constructor(public _newsService: NewsService, public _userService: SubAdminService) { }
 	userCount: any;
 	postCount: any;
+	Page: Number = 1;
 	ngOnInit() {
 		this.getNews();
 		this.getAllUsers();

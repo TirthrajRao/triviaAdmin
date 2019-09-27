@@ -12,13 +12,14 @@ import Swal from 'sweetalert2';
 export class PendingPostsComponent implements OnInit {
 
   newList: any = [];
+  Page: Number = 1;
 
   constructor(public _newsService: NewsService) { }
 
   ngOnInit() {
     this.getPendingNews();
   }
-  
+
   //get all category
   getPendingNews(): void {
     this._newsService.getAllPendingNews().subscribe((res: any) => {

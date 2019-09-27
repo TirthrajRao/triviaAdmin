@@ -14,9 +14,10 @@
           <th>Approve</th>
           <th>Reject</th>
         </thead>
-        <tbody *ngFor="let news of newList;let i=index">
+        <tbody
+          *ngFor="let news of newList|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
           <tr>
-            <td>{{i+1}}</td>
+            <td>{{(5*(Page-1)+i)+1}} </td>
             <td>{{news.newsTitleEnglish}}</td>
             <td>{{news.newsCategory}}</td>
             <td>{{news.createdBy.email}}</td>
@@ -26,6 +27,9 @@
           </tr>
         </tbody>
       </table>
+      <div class="justify-content-center w-100">
+        <pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+      </div>
     </div>
   </div>
 </div>

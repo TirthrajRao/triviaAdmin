@@ -44,20 +44,26 @@
 					<th>Category</th>
 					<th>Title</th>
 					<th>Date</th>
-					<th>Post Views</th>
+					<th>English Views</th>
+					<th>Hindi Views</th>
 				</thead>
 				<tbody>
-					<tr *ngFor="let news of news_array | slice:0:5; let i=index">
-						<td>{{i+1}}</td>
+					<tr
+						*ngFor="let news of news_array|paginate: { id: 'pagination2',itemsPerPage: 5, currentPage: Page };let i=index">
+						<td>{{(5*(Page-1)+i)+1}} </td>
 						<td>{{news.newsCategory}}</td>
 						<td
 							style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow:ellipsis;">
 							{{news.newsTitleEnglish}}</td>
 						<td>{{news.createdAt| date: 'short'}}</td>
-						<td>{{news.views}}</td>
+						<td>{{news.englishViews}}</td>
+						<td>{{news.hindiViews}}</td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="justify-content-center w-100">
+				<pagination-controls id="pagination2" (pageChange)="Page = $event"></pagination-controls>
+			</div>
 		</div>
 	</div>
 </div>
