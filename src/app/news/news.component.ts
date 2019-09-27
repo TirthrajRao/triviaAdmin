@@ -37,6 +37,7 @@ export class NewsComponent implements OnInit {
 			newsHindi: new FormControl('', Validators.required),
 			newsImage: new FormControl('', Validators.required),
 			categoryId: new FormControl('', Validators.required),
+			newsType: new FormControl('', Validators.required),
 		});
 
 		this.editnews_form = new FormGroup({
@@ -46,6 +47,7 @@ export class NewsComponent implements OnInit {
 			newsHindi: new FormControl('', Validators.required),
 			newsImage: new FormControl('', Validators.required),
 			categoryId: new FormControl('', Validators.required),
+			newsType: new FormControl('', Validators.required),
 		});
 	}
 
@@ -109,6 +111,9 @@ export class NewsComponent implements OnInit {
 
 	//add news
 	addNews() {
+
+		console.log('News Data:', this.news_form.value);
+
 		const data = new FormData();
 		_.forOwn(this.news_form.value, (value, key) => {
 			data.append(key, value);
