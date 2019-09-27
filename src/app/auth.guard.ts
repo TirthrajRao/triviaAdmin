@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoginService } from '../app/services/login.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-	userRole = JSON.parse(localStorage.getItem("userRole"));
+	userRole;
 	accessToken = JSON.parse(localStorage.getItem("triviaAdmin"));
-
-	constructor(private router: Router) {
+	subUserRole;
+	constructor(private router: Router, public auth: LoginService) {
+		this.auth.subUserRole.subscribe((data: any) => {
+			this.subUserRole = data.test1;
+			console.log(this.subUserRole);
+		})
 	}
-
-
-
 	canActivate(): boolean {
-		console.log("localstorage admin details ", this.userRole);
+		console.log("localstorage admin details ", this.subUserRole);
 		if (this.accessToken) {
 			return true
 		} else {
@@ -29,18 +31,21 @@ export class AuthGuard implements CanActivate {
 	providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-	userRole = JSON.parse(localStorage.getItem("userRole"));
 	accessToken = JSON.parse(localStorage.getItem("triviaAdmin"));
-
-	constructor(private router: Router) {
+	userRole;
+	admin = JSON.parse(localStorage.getItem("userRole"));
+	constructor(private router: Router, public auth: LoginService) {
+		this.auth.userRole.subscribe((data: any) => {
+			console.log("he bhagvan ama login user avu joye", data);
+			this.userRole = data.test;
+			console.log(this.userRole)
+		})
+		console.log("admin user details ", this.admin);
 	}
 
-
-
 	canActivate(): boolean {
-		console.log("localstorage admin details ", this.userRole);
 		if (this.accessToken) {
-			if (this.userRole === 'admin') {
+			if (this.userRole === 'admin' || this.admin === 'admin') {
 				return true;
 			} else {
 				Swal.fire({
@@ -49,7 +54,7 @@ export class AdminGuard implements CanActivate {
 					showConfirmButton: false,
 					timer: 2000
 				})
-				alert('unauthorised access');
+				this.router.navigate(['/dashboard'])
 				return false;
 			}
 		} else {

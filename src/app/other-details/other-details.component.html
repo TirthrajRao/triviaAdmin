@@ -14,6 +14,11 @@
 				<ckeditor [config]="config" formControlName="terms" [(ngModel)]="otherDetails.terms"></ckeditor>
 			</div>
 
+			<div class="col-md-12">
+				<input type="submit" name="" class="btn btn-primary float-right ml-auto"
+					(click)="extraDetails(otherDetails)" [disabled]="!details.valid">
+			</div>
+
 			<div class="col-md-6 privacy" *ngFor="let other of other_details">
 				<h3 class="text-primary">Privacy: </h3>
 				<div class="card p-3">

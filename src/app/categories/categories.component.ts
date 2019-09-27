@@ -21,6 +21,7 @@ export class CategoriesComponent implements OnInit {
 	mediaPath = config.mediaApiUrl;
 	url: any;
 	catdata: any;
+	P: Number = 1;
 	constructor(public _categoryService: CategoryService) { }
 
 	ngOnInit() {
@@ -77,6 +78,8 @@ export class CategoriesComponent implements OnInit {
 				timer: 2000
 			})
 
+			$('#modaladdTechnologyForm').modal('hide');
+
 			this.category_form.reset();
 			this.getCategories();
 		}, err => {
@@ -122,7 +125,6 @@ export class CategoriesComponent implements OnInit {
 		}
 
 		this._categoryService.updateCategory(this.catdata).subscribe((res: any) => {
-			console.log("res=========>", res);
 			this.editcatr_form.reset();
 			Swal.fire({
 				type: 'success',
@@ -130,6 +132,8 @@ export class CategoriesComponent implements OnInit {
 				showConfirmButton: false,
 				timer: 2000
 			})
+
+			$('#myModal').modal('hide');
 
 			this.getCategories();
 		},

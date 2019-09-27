@@ -3,7 +3,7 @@
 
 		<div class="col-md-12">
 
-			<h3 class="text-primary font-weight-bold">Add News</h3>
+			<h3 class="text-primary font-weight-bold">Add New Trivia Post</h3>
 			<form [formGroup]="news_form" (ngSubmit)="addNews()">
 				<div class="row">
 					<div class="col-md-6">
@@ -42,7 +42,6 @@
 					<div class="col-md-6">
 						News (English):<br>
 						<ckeditor formControlName="newsEnglish" [config]="config"></ckeditor><br><br>
-						<!-- <textarea formControlName="newsEnglish" placeholder="News (English)"></textarea><br><br> -->
 					</div>
 					<div class="col-md-6">
 						News (Hindi):<br>
@@ -51,68 +50,85 @@
 				</div>
 
 
-				<input type="submit" name="categories_submit" [disabled]="!news_form.valid" class="btn btn-primary">
+				<input type="submit" name="categories_submit" [disabled]="!news_form.valid"
+					class="btn btn-primary mb-5">
 			</form>
 		</div>
 		<div class="card" id="allRecords">
 			<div class="card-header card-header-primary">
-				<h4 class="card-title ">All News</h4>
+				<h4 class="card-title ">All Trivia Post</h4>
 			</div>
 			<div class="card-body">
 				<div class="table table-responsive">
 					<table class="table">
 						<thead>
-							<th>Title (EN)</th>
-							<th>News (EN)</th>
-							<th>Edit</th>
-							<th>Delete</th>
-							<th>News Status</th>
+							<th>Title</th>
+							<th>Category</th>
+							<th class="text-center">Edit</th>
+							<th class="text-center">Delete</th>
+							<th>Date</th>
+							<th class="text-center">English Views</th>
+							<th class="text-center">Hindi Views</th>
+							<th class="text-center">News Status</th>
 						</thead>
 						<tbody>
-							<tr *ngFor="let news of news_array | paginate: { itemsPerPage: 3, currentPage: p }">
+							<tr *ngFor="let news of news_array | paginate: { itemsPerPage: 3, currentPage: P }">
 								<td>{{news.newsTitleEnglish}}</td>
 								<td>
-									<div [innerHTML]="news.newsEnglish"></div>
+									<!-- <div class="news_description" [innerHTML]="news.newsEnglish"></div> -->
+									{{news.newsCategory}}
 								</td>
-								<td><i class="fas fa-edit" data-toggle="modal" data-target="#myModal"
-										(click)="editNews(news)" aria-hidden="true"></i></td>
-								<td><i class="fas fa-trash" (click)="deleteNews(news.newsId)" aria-hidden="true"></i>
+								<td class="text-center"><i class="fas fa-edit" style="cursor:pointer"
+										data-toggle="modal" data-target="#myModal" (click)="editNews(news)"
+										aria-hidden="true"></i></td>
+								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer"
+										(click)="deleteNews(news.newsId)" aria-hidden="true"></i>
 								</td>
-								<td>{{news.isApproved}}</td>
+								<td>{{news.createdAt | date: 'short'}}</td>
+								<td class="text-center">{{news.englishViews}}</td>
+								<td class="text-center">{{news.hindiViews}}</td>
+								<td class="text-center">{{news.isApproved}}</td>
 							</tr>
 						</tbody>
-						<pagination-controls (pageChange)="p = $event"></pagination-controls>
 					</table>
+					<div class="justify-content-center w-100">
+						<pagination-controls (pageChange)="P = $event"></pagination-controls>
+					</div>
 				</div>
 			</div>
 		</div>
-
-
-
 	</div>
 </div>
 
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-body">
-				<h5>Update News</h5>
+			<div class="modal-header">
+				<h4 class="text-center">Edit News</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
 				<form [formGroup]="editnews_form" *ngIf="singleNews">
 					<input type="text" id="hey" hidden value="{{singleNews.newsId}}">
+					<div class="col-md-12">
 
-					<div class="form-group">
-						<input class="form-control form-control-sm" type="text" formControlName="newsTitleEnglish"
-							[(ngModel)]="singleNews.newsTitleEnglish" placeholder="Title (En):">
-					</div>
+						<div class="form-group">
+							<label class="bmd-label-floating">NewsTitle(English)</label>
+							<input class="form-control" type="text" formControlName="newsTitleEnglish"
+								[(ngModel)]="singleNews.newsTitleEnglish">
+						</div>
 
-					<div class="form-group">
-						<input class="form-control form-control-sm" type="text" formControlName="newsTitleHindi"
-							[(ngModel)]="singleNews.newsTitleHindi" placeholder="Title (Hindi):">
-					</div>
 
-					<div class="row">
-						<div class="col-md-12">
+						<div class="form-group">
+							<label class="bmd-label-floating">NewsTitle(Hindi)</label>
+							<input class="form-control" type="text" formControlName="newsTitleHindi"
+								[(ngModel)]="singleNews.newsTitleHindi">
+						</div>
+
+						<div class="form-group">
 							<select class="browser-default custom-select custom-select-md mb-1"
 								formControlName="categoryId" *ngIf="singleNews.newsCategoryId"
 								[(ngModel)]="singleNews.newsCategoryId">
@@ -120,33 +136,37 @@
 								<option *ngFor="let category of category_array" value="{{category.categoryId}}">
 									{{category.categoryTitle}}
 								</option>
-							</select><br><br>
+							</select>
+						</div>
+						<div class="form-group">
+							<div class="form-group">
+								<ckeditor formControlName="newsEnglish" [(ngModel)]="singleNews.newsEnglish"
+									[config]="config">
+								</ckeditor>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-group">
+								<ckeditor formControlName="newsHindi" [(ngModel)]="singleNews.newsHindi"
+									[config]="config">
+								</ckeditor>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<input type="file" formControlName="newsImage" (change)="addFile($event)"><br><br>
+						</div>
+						<div class="col-md-6" *ngIf="url">
+							<img [src]="url" height="50px" width="50px">
+						</div>
+						<div class="col-md-6" *ngIf="!url">
+							<img src="{{mediaPath}}{{singleNews.newsImage}}" height="100px" width="100px">
 						</div>
 					</div>
-
-					News (En):
-					<ckeditor formControlName="newsEnglish" [(ngModel)]="singleNews.newsEnglish" [config]="config">
-					</ckeditor><br><br>
-
-					News (En):
-					<ckeditor formControlName="newsHindi" [(ngModel)]="singleNews.newsHindi" [config]="config">
-					</ckeditor><br><br>
-					<div class="col-md-6">
-						<input type="file" formControlName="newsImage" (change)="addFile($event)"><br><br>
-					</div>
-					<div class="col-md-6" *ngIf="url">
-						<img [src]="url" height="50px" width="50px">
-					</div>
-					<div class="col-md-6" *ngIf="!url">
-						<img src="{{mediaPath}}{{singleNews.newsImage}}" height="100px" width="100px">
+					<div class="d-flex justify-content-center">
+						<button type="button" class="btn btn-primary mb-5" data-dismiss="modal"
+							(click)="updateCat(editnews_form.value)">Update</button>
 					</div>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal"
-					(click)="updateCat(editnews_form.value)">Update</button>
-				<button type="button" class="btn btn-warning" data-dismiss="modal"
-					(click)="resetUpdateForm()">Close</button>
 			</div>
 		</div>
 	</div>

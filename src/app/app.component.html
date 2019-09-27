@@ -34,7 +34,6 @@
 <router-outlet></router-outlet> -->
 
 
-<h1>{{userRole}}</h1>
 <div class="wrapper">
 	<div class="sidebar col-xs-12 col-sm-4 col-md-3" style="background-size: cover; " id="sidebar" data-color="purple"
 		data-background-color="white" data-image="assets/img/sidebar-1.jpg" *ngIf="auth.isLoggednIn()">
@@ -43,7 +42,7 @@
 				style="background-image: url('assets/Trivia.png'); width: 230px; height:200px; background-size: contain; background-position: center; background-repeat:no-repeat;">
 			</div>
 			<ul class="nav">
-				<li class="nav-item " *ngIf="auth.isLoggednIn()">
+				<li class="nav-item " *ngIf="auth.isLoggednIn() ">
 					<a class="nav-link" routerLink="/dashboard">
 						<i class="material-icons">dashboard</i>
 						<p>Dashboard</p>
@@ -58,40 +57,40 @@
 				</li>
 
 				<li class="nav-item ">
-					<a class="nav-link" routerLink="/categories" *ngIf=" userRole == 'admin'">
+					<a class="nav-link" routerLink="/categories" *ngIf="auth.isLoggednIn() &&  userRole || admin == 'admin'">
 						<i class="fa fa-list-alt"></i>
 						<p>Catagory</p>
 					</a>
 				</li>
 
 				<li class="nav-item ">
-					<a class="nav-link" routerLink="/sub-admin" *ngIf=" userRole == 'admin'">
+					<a class="nav-link" routerLink="/sub-admin" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
 						<i class="fa fa-lock" aria-hidden="true" style=" font-size: 36px;"></i>
 						<p>Sub Admin</p>
 					</a>
 				</li>
-				
+
 				<li class="nav-item ">
-					<a class="nav-link" routerLink="/pending-posts" *ngIf=" userRole == 'admin'">
+					<a class="nav-link" routerLink="/pending-posts" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
 						<i class="fas fa-id-card-alt"></i>
 						<p>Pending Posts</p>
 					</a>
 				</li>
 				<li class="nav-item ">
-					<a class="nav-link" routerLink="/user-status" *ngIf=" userRole == 'admin'">
+					<a class="nav-link" routerLink="/user-status" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
 						<i class="fa fa-user" aria-hidden="true" style="font-size: 30px;"></i>
 						<p>User Status</p>
 					</a>
 				</li>
 				<li class="nav-item ">
-					<a class="nav-link" routerLink="/other-details" *ngIf=" userRole == 'admin'">
+					<a class="nav-link" routerLink="/other-details" *ngIf=" auth.isLoggednIn() && userRole || admin == 'admin'">
 						<i class="fas fa-university" style="font-size: 30px;"></i>
 						<p>Other Details</p>
 					</a>
 				</li>
 
 				<li class="nav-item ">
-					<a class="nav-link" outerLink="/login" (click)="Logout()" *ngIf="auth.isLoggednIn()">
+					<a class="nav-link" style="cursor:pointer;" (click)="Logout()" *ngIf="auth.isLoggednIn()">
 						<i class="fas fa-sign-out-alt" style="font-size: 19px;"></i>
 						<p>Log out</p>
 					</a>

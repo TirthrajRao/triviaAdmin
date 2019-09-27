@@ -40,7 +40,12 @@ body{
 	color: #c51c24;
 	border: 2px solid #c51c24;
 }
-
+.btn.btn-primary:disabled {
+    pointer-events: none;
+}
+.news_description p {
+	word-break: break-all;
+}
 .ngx-pagination .current {
 	background: #c51c24 !important;
 }

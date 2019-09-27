@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
-		<button class="btn btn-primary float-right ml-auto" data-toggle="modal" data-target="#modaladdTechnologyForm">Add
+		<button class="btn btn-primary float-right ml-auto" data-toggle="modal"
+			data-target="#modaladdTechnologyForm">Add
 			Sub-Admin</button>
 
 		<div class="card" id="allRecords">
@@ -14,16 +15,19 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email</th>
-							<th colspan="2">Action</th>
+							<th class="text-center">Edit</th>
+							<th class="text-center">Delete</th>
 						</thead>
 						<tbody>
 							<tr *ngFor="let subadmin of subadmin_array">
 								<td>{{subadmin.firstName}}</td>
 								<td>{{subadmin.lastName}}</td>
 								<td>{{subadmin.email}}</td>
-								<td> <i class="fas fa-edit" aria-hidden="true" data-toggle="modal"
-										data-target="#myModal" (click)="editSubAdmin(subadmin)"></i></td>
-								<td><i class="fas fa-trash" (click)="deleteSubAdmin(subadmin.userId)"></i>
+								<td class="text-center"> <i class="fas fa-edit" aria-hidden="true" data-toggle="modal"
+										data-target="#myModal" (click)="editSubAdmin(subadmin)"
+										style="cursor:pointer;"></i></td>
+								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer;"
+										(click)="deleteSubAdmin(subadmin.userId)"></i>
 								</td>
 							</tr>
 						</tbody>
@@ -91,12 +95,12 @@
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
-				<div class="modal-header">
-						<h4 class="text-center">Update Sub-Admin</h4>
-						<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
+			<div class="modal-header">
+				<h4 class="text-center">Update Sub-Admin</h4>
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
 			<div class="modal-body">
 				<form [formGroup]="editsubadminForm" *ngIf="singleSubAdmin">
 					<input type="text" id="hey" value="{{singleSubAdmin.userId}}" hidden>

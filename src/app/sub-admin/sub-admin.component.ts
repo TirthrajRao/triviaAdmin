@@ -72,6 +72,9 @@ export class SubAdminComponent implements OnInit {
         timer: 2000
       })
 
+      $('#modaladdTechnologyForm').modal('hide');
+     
+
       this.getSubAdmin();
     },
       err => {
@@ -125,6 +128,7 @@ export class SubAdminComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       })
+      $('#myModal').modal('hide');
       this.editsubadminForm.reset();
       this.getSubAdmin();
     },
