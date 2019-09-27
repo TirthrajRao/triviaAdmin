@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit {
 	login(detail) {
 		this.loginService.authorize(detail).subscribe((res: any) => {
 			console.log("login user response", res);
-			localStorage.setItem("userRole", JSON.stringify(res.data.userRole));
-			localStorage.setItem("triviaAdmin", JSON.stringify(res.data.accessToken));
 			this.msg = 'Logged in successfully! ';
 			this.router.navigate(['/dashboard']);
 			// setTimeout(function () { window.location.reload() }, 1);

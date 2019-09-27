@@ -11,32 +11,28 @@ export class AppComponent {
   title = 'triviaAdmin';
   loggedIn: boolean = false;
   loggedInUser = JSON.parse(localStorage.getItem("triviaAdmin"));
-  userRole = JSON.parse(localStorage.getItem("userRole"));
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, public auth: LoginService) { }
+  userRole;
+  subUserRole;
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, public auth: LoginService) {
+    this.auth.userRole.subscribe((data: any) => {
+      console.log("he bhagvan ama login user avu joye", data);
+      this.userRole = data.test;
+      console.log(this.userRole)
+    })
+    this.auth.subUserRole.subscribe((data:any)=>{
+      this.subUserRole = data.test1;
+      console.log(this.subUserRole);
+    })
+  }
 
   ngOnInit() {
-    setTimeout(()=>{
-
-      this.doInit()
-    },1000)
+    // console.log(this.userRole);
   }
-doInit(){
-  this.loggedInUser = JSON.parse(localStorage.getItem("triviaAdmin"));
-  this.userRole = JSON.parse(localStorage.getItem("userRole"));
-  
-  console.log("init calles----", JSON.parse(localStorage.getItem("userRole")));
-    // this.cdRef.detectChanges();
-  if (this.loggedInUser) {
-    this.loggedIn = true;
-  } else {
-    this.loggedIn = false;
-  }
-}
   Logout() {
     localStorage.clear();
     // localStorage.removeItem("triviaAdmin");
     this.loggedIn = false;
-    			setTimeout(function () { window.location.reload() }, 1);
+    setTimeout(function () { window.location.reload() }, 1);
     this.router.navigate(['/login']);
   }
 }
