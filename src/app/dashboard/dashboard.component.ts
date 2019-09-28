@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
 			(res: News[]) => {
 				this.news_array = res;
 				this.postCount = res.length
-				console.log(this.news_array);
 			},
 			(err) => {
 				this.error = err;
@@ -51,7 +50,6 @@ export class DashboardComponent implements OnInit {
 		this._userService.getAllUsers().subscribe(
 			(res: SubAdmin[]) => {
 				this.userCount = res.length;
-				console.log(this.userCount);
 			},
 			(err) => {
 				this.error = err;

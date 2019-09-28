@@ -108,10 +108,14 @@ export class CategoriesComponent implements OnInit {
 					showConfirmButton: false,
 					timer: 2000
 				})
-
 				this.getCategories();
+			}, err => {
+				console.log(err);
 			})
 	}
+
+
+
 
 
 	//for upadting the category

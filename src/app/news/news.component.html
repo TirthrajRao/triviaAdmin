@@ -28,6 +28,9 @@
 								name="categoryImage" required="required" (change)="news_image($event)">
 						</div>
 					</div>
+					<div class="col-md-4">
+						<img [src]="urls" class="rounded mb-3" width="180" class="p-2">
+					</div>
 				</div>
 
 				<div class="row">
@@ -174,7 +177,8 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<input type="file" formControlName="newsImage" (change)="addFile($event)"><br><br>
+							<input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="newsImage"
+								(change)="addFile($event)"><br><br>
 						</div>
 						<div class="col-md-6" *ngIf="url">
 							<img [src]="url" height="50px" width="50px">

@@ -6,29 +6,29 @@
 
 		<div class="card" id="allRecords">
 			<div class="card-header card-header-primary">
-				<h4 class="card-title ">Sub-Admin List</h4>
+				<h4 class="card-title ">All Sub-Admin</h4>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<th>First Name</th>
-							<th>Last Name</th>
+							<th>Name</th>
 							<th>Email</th>
-							<th class="text-center">Edit</th>
-							<th class="text-center">Delete</th>
+							<th>Date Of Joining</th>
+							<th class="text-center" colspan="2">Action</th>
 						</thead>
 						<tbody>
 							<tr *ngFor="let subadmin of subadmin_array">
-								<td>{{subadmin.firstName}}</td>
-								<td>{{subadmin.lastName}}</td>
+								<td>{{subadmin.firstName}} {{subadmin.lastName}}</td>
 								<td>{{subadmin.email}}</td>
+								<td>{{subadmin.createdAt| date: 'short'}}</td>
 								<td class="text-center"> <i class="fas fa-edit" aria-hidden="true" data-toggle="modal"
 										data-target="#myModal" (click)="editSubAdmin(subadmin)"
 										style="cursor:pointer;"></i></td>
 								<td class="text-center"><i class="fas fa-trash" style="cursor:pointer;"
 										(click)="deleteSubAdmin(subadmin.userId)"></i>
 								</td>
+
 							</tr>
 						</tbody>
 					</table>

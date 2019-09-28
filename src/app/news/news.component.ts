@@ -29,6 +29,11 @@ export class NewsComponent implements OnInit {
 	news_form: FormGroup;
 	editnews_form: FormGroup;
 	P: Number = 1;
+
+	files: any;
+	imgURL;
+	urls = new Array<string>();
+
 	constructor(public _newsService: NewsService, public _categoryService: CategoryService) {
 		this.news_form = new FormGroup({
 			newsTitleEnglish: new FormControl('', Validators.required),
@@ -82,7 +87,16 @@ export class NewsComponent implements OnInit {
 	}
 
 	news_image(event) {
+
 		this.fileNews = event.target.files;
+
+		if (this.fileNews) {
+			let reader = new FileReader();
+			reader.onload = (e: any) => {
+				this.urls = e.target.result;
+			}
+			reader.readAsDataURL(this.fileNews[0]);
+		}
 	}
 
 	//get all category

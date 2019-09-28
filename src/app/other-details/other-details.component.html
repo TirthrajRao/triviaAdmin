@@ -3,7 +3,8 @@
 		<div class="row">
 			<div class="col-12">
 				<span class="text-dark">App logo: </span>
-				<input type="file" formControlName="logo" [(ngModel)]="otherDetails.logo" (change)="logoImage($event)">
+				<input type="file" accept=".jpeg, .jpg, .png, .gif" formControlName="logo"
+					[(ngModel)]="otherDetails.logo" (change)="logoImage($event)">
 			</div>
 			<div class="col-md-6">
 				<h6 class="text-primary">Privacy Policy: </h6>

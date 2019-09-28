@@ -37,10 +37,21 @@ export class AuthInterceptor implements HttpInterceptor {
                     // Cath Error 400 Bad Request
                     catchError((error: HttpErrorResponse) => {
                         const errorMessage = error.error.message;
+
+                        console.log('ErrorMessage===========>>>>', errorMessage);
+
                         if (error.status === 400) {
                             Swal.fire({
                                 type: 'error',
                                 title: errorMessage,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        } else if (error.status === 500) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'Internal Server Error!',
                                 showConfirmButton: false,
                                 timer: 2000
                             })

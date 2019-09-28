@@ -14,14 +14,15 @@
 						<thead class=" text-primary">
 							<th>#</th>
 							<th>Category Title</th>
-							<th class="text-center">Edit</th>
-							<th class="text-center">Delete</th>
+							<th class="text-center">Total Live Post</th>
+							<th class="text-center" colspan="2">Action</th>
 						</thead>
 						<tbody>
 							<tr
 								*ngFor="let category of category_array| paginate: { itemsPerPage: 12, currentPage: P };let i=index">
 								<td>{{i+1}}</td>
 								<td>{{category.categoryTitle}}</td>
+								<td class="text-center">{{category.postCount}}</td>
 								<td class="text-center"> <i class="fas fa-edit" style="cursor:pointer;"
 										aria-hidden="true" data-toggle="modal" data-target="#myModal"
 										(click)="editCat(category)"></i></td>

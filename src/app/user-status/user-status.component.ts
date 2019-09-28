@@ -25,6 +25,8 @@ export class UserStatusComponent implements OnInit {
 	userCount: any;
 	p: Number = 1;
 	Page: Number = 1;
+	singlefeedback: any;
+
 	ngOnInit() {
 		this.getAllUsers();
 		this.getUserFeedback();
@@ -42,6 +44,11 @@ export class UserStatusComponent implements OnInit {
 				this.error = err;
 			});
 	}
+
+	viewMore(feedback) {
+		this.singlefeedback = feedback;
+	}
+
 
 	getUserFeedback(): void {
 		this._userService.getUserFeedback().subscribe(

@@ -22,8 +22,10 @@
             <td>{{news.newsCategory}}</td>
             <td>{{news.createdBy.email}}</td>
             <td>{{news.createdAt | date: 'short'}}</td>
-            <td><i class="fa fa-check-circle fa-3x" (click)="approveNews(news.newsId)" aria-hidden="true"></i></td>
-            <td><i class="fa fa-times fa-3x" (click)="rejectNews(news.newsId)" aria-hidden="true"></i></td>
+            <td><i class="fa fa-check-circle fa-3x" style="cursor:pointer;" (click)="approveNews(news.newsId)"
+                aria-hidden="true"></i></td>
+            <td><i class="fa fa-times fa-3x" style="cursor:pointer;" (click)="rejectNews(news.newsId)"
+                aria-hidden="true"></i></td>
           </tr>
         </tbody>
       </table>
