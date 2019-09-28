@@ -22,7 +22,8 @@
 								*ngFor="let category of category_array| paginate: { itemsPerPage: 12, currentPage: P };let i=index">
 								<td>{{i+1}}</td>
 								<td>{{category.categoryTitle}}</td>
-								<td class="text-center">{{category.postCount}}</td>
+								<td class="text-center">{{category.countPost}}</td>
+								<!-- <td class="text-center">{{category.postCount}}</td> -->
 								<td class="text-center"> <i class="fas fa-edit" style="cursor:pointer;"
 										aria-hidden="true" data-toggle="modal" data-target="#myModal"
 										(click)="editCat(category)"></i></td>

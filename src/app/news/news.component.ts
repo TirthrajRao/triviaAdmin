@@ -29,6 +29,7 @@ export class NewsComponent implements OnInit {
 	news_form: FormGroup;
 	editnews_form: FormGroup;
 	P: Number = 1;
+	imageHide: boolean = true;
 
 	files: any;
 	imgURL;
@@ -63,14 +64,14 @@ export class NewsComponent implements OnInit {
 			// console.log("Hey");
 			self.hello();
 		});
-		this.config = {
-			toolbar: [
-				['Maximize'],
-				['NumberedList', 'BulletedList'],
-				['Cut', 'Copy'],
-				['Undo', 'Redo']
-			]
-		};
+		// this.config = {
+		// 	toolbar: [
+		// 		['Maximize'],
+		// 		['NumberedList', 'BulletedList'],
+		// 		['Cut', 'Copy'],
+		// 		['Undo', 'Redo']
+		// 	]
+		// };
 		this.getCategories();
 		this.getNews();
 	}
@@ -126,8 +127,6 @@ export class NewsComponent implements OnInit {
 	//add news
 	addNews() {
 
-		console.log('News Data:', this.news_form.value);
-
 		const data = new FormData();
 		_.forOwn(this.news_form.value, (value, key) => {
 			data.append(key, value);
@@ -148,6 +147,7 @@ export class NewsComponent implements OnInit {
 				showConfirmButton: false,
 				timer: 2000
 			})
+			this.imageHide = false;
 			this.getNews();
 		}, err => {
 
